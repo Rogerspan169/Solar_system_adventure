@@ -8,7 +8,7 @@
 <style>
 body{
   margin:0;
-  background:#000;
+  background:transparent;
   font-family:'Noto Sans TC',sans-serif;
   color:#fff;
 }
@@ -789,6 +789,7 @@ body{
 #info-screen .action-btn {
   display: block; /* 變成區塊元素 */
   margin: 0 auto; /* 自動左右外距，水平置中 */
+  margin-top: 10pt;
   min-width: 120px;
 }
 
@@ -822,11 +823,18 @@ h4 {
   animation: rainbow 2s ease infinite;
 }
 
-  .endscore-display {
+.endscore-display {
   text-align: center;
   margin-top: 1em;
   font-size: 1.8em;
   color: #00ffcc;
+}
+
+#final-screen .action-btn {
+  display: block; /* 變成區塊元素 */
+  margin: 0 auto; /* 自動左右外距，水平置中 */
+  margin-top: 10pt;
+  min-width: 140px;
 }
 
 </style>
@@ -992,7 +1000,7 @@ h4 {
       <p id="knowledge-text"></p>
     </div>
     <div id="info-link" class="hidden"></div>
-    <button onclick="nextStar()" class="action-btn" >繼續</button>
+    <button onclick="nextStar()" class="action-btn">繼續</button>
   </div>
 </div>
 
@@ -1005,7 +1013,7 @@ h4 {
     <h4 style="text-align: center;">在這場橫跨太陽系的航行中，<br>你降落過炙熱的行星、<br>也踏上冰封而遙遠的世界，<br>一次次補給燃料。<br>一次次承受宇宙帶來的考驗。<br><br>在這廣袤無垠的宇宙中，<br>每顆星球都有它獨特的樣貌，</h4>
     <h2 id="final-highlight">雖為滄海一粟，<br>卻於渺小中，誕生意義。</h2>
     <div class="endscore-display" id="endscore-display"></div>
-    <button onclick="restartWholeGame()" class="action-btn" style="display: block; margin: 0 auto; margin-top: 10pt;">重闖太陽系</button>
+    <button onclick="restartWholeGame()" class="action-btn">重闖太陽系</button>
   </div>
 </div>
 
@@ -1021,7 +1029,7 @@ h4 {
    - enabled=false 時完全不影響正常抽樣
 ========================================================= */
 const TEST_FORCE_SHOP = {
-  enabled: true, // 要正常抽就改 false
+  enabled: false, // 要正常抽就改 false
   tools: [
     "在【極端低溫】星球的首次補給 +15 燃料",
     "若本關未使用棄牌，通關金幣 +30%",
@@ -1031,7 +1039,7 @@ const TEST_FORCE_SHOP = {
     "下一次補給若為高牌/一對/兩對， +25 燃料",
     "扣血頻率改為4次補給，持續一關",
   ],
-  levelIndex: 6,
+  levelIndex: 10,
 
   startHP: null,
   initialHand: [
@@ -3337,152 +3345,91 @@ updateTopUILayout();
 const stars = [
   {
     title: "水星",
-    knowledge: `水星是太陽系中離太陽最近、最小的行星，甚至比一些衛星還小。由於缺乏大氣，水星的日夜溫差非常大，白天溫度高達 400 度，晚上則是零下 180 度。
-    
-    根據信使號的觀測，水星有著全球性磁場，磁場強度是地球的 1%。磁場的來源推測是其內核富含鐵，詳細結果需要等待貝皮可倫坡號確認。`,
+    knowledge: `水星幾乎沒有大氣層以保存熱量，所以面向與背對太陽面的溫差可達 610 度，是太陽系所有行星溫差最大者。在沒日照的極區隕石坑可能會有水冰存在。`,
     link: [
-      { text: "NASA：Mercury", url: "https://science.nasa.gov/mercury/facts/"},
-      { text: "展示場 2 樓：太陽系結構", url: "https://sites.google.com/view/tamwebtp/%E4%BA%8C%E6%A8%93%E5%B1%95%E7%A4%BA%E5%8D%80_1/%E5%A4%AA%E9%99%BD%E7%B3%BB/%E5%A4%AA%E9%99%BD%E7%B3%BB%E7%B5%90%E6%A7%8B"},
-      { text: "展示場 2 樓：太陽系內天體的定義和成員", url: "https://sites.google.com/view/tamwebtp/%E4%BA%8C%E6%A8%93%E5%B1%95%E7%A4%BA%E5%8D%80_1/%E5%A4%AA%E9%99%BD%E7%B3%BB/%E5%A4%AA%E9%99%BD%E7%B3%BB%E5%85%A7%E5%A4%A9%E9%AB%94%E7%9A%84%E5%AE%9A%E7%BE%A9%E5%92%8C%E6%88%90%E5%93%A1"},
-      { text: "天文新知：太陽系內可能擁有鑽石層的行星", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=D2A26E8BF434225E"},
-      { text: "天文新知：貝皮可倫坡號第6次飛掠水星的3張最佳影像", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=F8DBCA7D9D43C951"}
+      { text: "NASA：Mercury", url: "https://science.nasa.gov/mercury/facts/"}
     ]
   },
   {
     title: "金星",
-    knowledge: `金星是離太陽第二近的行星，它跟地球差不多大，質量是地球的 0.8 倍，半徑是地球的 0.95倍。
-    
-    金星有著濃厚的大氣層，大氣壓力是地球的 90 倍，大氣中有 96% 是二氧化碳，使溫室效應非常嚴重，所以金星表面溫度甚至比水星還高。
-    
-    根據破曉號的觀測，金星大氣中還有硫酸形成的硫酸雲，所以金星下雨的話會下硫酸雨！`,
+    knowledge: `金星濃厚的大氣層主要由二氧化碳構成，大氣壓力是地球的 90 倍以上，溫室效應使金星成為太陽系表面溫度最高的行星。金星的雲主成分是硫酸。`,
     link: [
-      { text: "NASA：Venus", url: "https://science.nasa.gov/venus/venus-facts/"},
-      { text: "展示場 2 樓：太陽系結構", url: "https://sites.google.com/view/tamwebtp/%E4%BA%8C%E6%A8%93%E5%B1%95%E7%A4%BA%E5%8D%80_1/%E5%A4%AA%E9%99%BD%E7%B3%BB/%E5%A4%AA%E9%99%BD%E7%B3%BB%E7%B5%90%E6%A7%8B"},
-      { text: "展示場 2 樓：太陽系內天體的定義和成員", url: "https://sites.google.com/view/tamwebtp/%E4%BA%8C%E6%A8%93%E5%B1%95%E7%A4%BA%E5%8D%80_1/%E5%A4%AA%E9%99%BD%E7%B3%BB/%E5%A4%AA%E9%99%BD%E7%B3%BB%E5%85%A7%E5%A4%A9%E9%AB%94%E7%9A%84%E5%AE%9A%E7%BE%A9%E5%92%8C%E6%88%90%E5%93%A1"},
-      { text: "天文新知：金星上可能有生命嗎？從雲層中再次觀測到磷化氫", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=08A02B9FA085A117"},
-      { text: "天文新知：NASA研究揭示金星地殼驚人秘密", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=F0494914063D6733"}
+      { text: "NASA：Venus", url: "https://science.nasa.gov/venus/venus-facts/"}
     ]
   },
   {
     title: "地球",
-    knowledge: `地球是離太陽第三近的行星，也是一顆美麗且有著生命的行星。
-    
-    科學家到目前為止都還沒在地球以外的地方發現過生命，更別提智慧文明了。不過，天文學家德瑞克提出了「德瑞克方程式」來估計銀河系中可能存在的高等智慧文明數量`,
+    knowledge: `地球表面富含液態水。具有濃厚大氣，含氮氣、氧氣，是目前唯一擁有智慧生命的星球`,
     link: [
-      { text: "展示場 1 樓：地球", url: "https://sites.google.com/view/tamwebtp/%E4%B8%80%E6%A8%93%E5%B1%95%E7%A4%BA%E5%8D%80_1/%E5%9C%B0%E7%90%83"},
-      { text: "展示場 3 樓：德瑞克方程式", url: "https://sites.google.com/view/tamwebtp/%E4%B8%89%E6%A8%93%E5%B1%95%E7%A4%BA%E5%8D%80_1/%E6%8E%A2%E7%B4%A2%E5%A4%96%E6%98%9F%E7%94%9F%E5%91%BD/%E5%BE%B7%E7%91%9E%E5%85%8B%E6%96%B9%E7%A8%8B%E5%BC%8F"}
+      { text: "展示場 1 樓：地球", url: "https://sites.google.com/view/tamwebtp/%E4%B8%80%E6%A8%93%E5%B1%95%E7%A4%BA%E5%8D%80_1/%E5%9C%B0%E7%90%83"}
     ]
   },
   {
     title: "火星",
-    knowledge: `火星是離太陽第四近的行星，也是繼月球後，科學家探索的下一個目標。
+    knowledge: `火星稀薄的大氣以二氧化碳為主，含氧量極低。火星因表面富含氧化鐵而呈現紅色。峽谷、高山等地形顯示火星曾經有活躍的地質活動。
     
-    隨著阿提米絲計劃的推進，人類將首先在月球上建立基地。這不僅是為了科學研究，更是為了登陸火星，打造人類未來可能的地外家園！`,
+    火星既有太陽系最高的山，也有太陽系最深的峽谷。`,
     link: [
       { text: "NASA：Mars", url: "https://science.nasa.gov/mars/facts/"},
-      { text: "NASA：阿提米絲計畫", url: "https://www.nasa.gov/reference/artemis-i-2/"},
-      { text: "天文新知：阿提米絲任務將迎來太空團隊的新紀元", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=4206B349FF3C2D45"},
-      { text: "天文新知：我們對火星為何呈紅色的理解錯了嗎？", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=A732AA24CE9BDCD2"},
-      { text: "天文新知：火星地下有海洋？最新研究再度支持地下水庫存在", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=882F57BFC2FAA7C4"},
-      { text: "天文新知：在火星地表首度觀測到可見光波段的綠色極光", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=D694D552027F0520"}
+      { text: "天文新知：我們對火星為何呈紅色的理解錯了嗎？", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=A732AA24CE9BDCD2"}
     ]
   },
   {
     title: "木星",
-    knowledge: `火星是離太陽第四近的行星，也是繼月球後，科學家探索的下一個目標。
+    knowledge: `木星大氣主要由氫、氦組成，還有少許水冰、氨冰。質量是其他所有行星總和的 2.5 倍。
     
-    隨著阿提米絲計劃的推進，人類將首先在月球上建立基地。這不僅是為了科學研究，更是為了登陸火星，打造人類未來可能的地外家園！`,
+    越往木星內部，壓力隨之上升，使得氣體也被壓縮成液體，甚至固體。顯眼的大紅斑是一個風暴，大小可以容納兩個地球`,
     link: [
-      { text: "NASA：Mars", url: "https://science.nasa.gov/mars/facts/"},
-      { text: "NASA：阿提米絲計畫", url: "https://www.nasa.gov/reference/artemis-i-2/"},
-      { text: "天文新知：阿提米絲任務將迎來太空團隊的新紀元", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=4206B349FF3C2D45"},
-      { text: "天文新知：我們對火星為何呈紅色的理解錯了嗎？", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=A732AA24CE9BDCD2"},
-      { text: "天文新知：火星地下有海洋？最新研究再度支持地下水庫存在", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=882F57BFC2FAA7C4"},
-      { text: "天文新知：在火星地表首度觀測到可見光波段的綠色極光", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=D694D552027F0520"}
+      { text: "NASA：Jupiter", url: "https://science.nasa.gov/jupiter/facts/"}
     ]
   },
   {
     title: "艾歐",
-    knowledge: `火星是離太陽第四近的行星，也是繼月球後，科學家探索的下一個目標。
-    
-    隨著阿提米絲計劃的推進，人類將首先在月球上建立基地。這不僅是為了科學研究，更是為了登陸火星，打造人類未來可能的地外家園！`,
+    knowledge: `艾歐僅有極稀薄的大氣，二氧化硫為主。火山活動是太陽系所有天體中最活躍的，原因之一是受木星潮汐力影響，之二是艾歐仍是一顆年輕的天體。`,
     link: [
-      { text: "NASA：Mars", url: "https://science.nasa.gov/mars/facts/"},
-      { text: "NASA：阿提米絲計畫", url: "https://www.nasa.gov/reference/artemis-i-2/"},
-      { text: "天文新知：阿提米絲任務將迎來太空團隊的新紀元", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=4206B349FF3C2D45"},
-      { text: "天文新知：我們對火星為何呈紅色的理解錯了嗎？", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=A732AA24CE9BDCD2"},
-      { text: "天文新知：火星地下有海洋？最新研究再度支持地下水庫存在", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=882F57BFC2FAA7C4"},
-      { text: "天文新知：在火星地表首度觀測到可見光波段的綠色極光", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=D694D552027F0520"}
     ]
   },
   {
     title: "歐羅巴",
-    knowledge: `火星是離太陽第四近的行星，也是繼月球後，科學家探索的下一個目標。
-    
-    隨著阿提米絲計劃的推進，人類將首先在月球上建立基地。這不僅是為了科學研究，更是為了登陸火星，打造人類未來可能的地外家園！`,
+    knowledge: `歐羅巴也僅有極稀薄的大氣，氧氣為主。表面是厚厚的冰殼，底下可能有著比地球海洋總水量還多的鹹水海洋，也因此可能含有生命存在`,
     link: [
-      { text: "NASA：Mars", url: "https://science.nasa.gov/mars/facts/"},
-      { text: "NASA：阿提米絲計畫", url: "https://www.nasa.gov/reference/artemis-i-2/"},
-      { text: "天文新知：阿提米絲任務將迎來太空團隊的新紀元", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=4206B349FF3C2D45"},
-      { text: "天文新知：我們對火星為何呈紅色的理解錯了嗎？", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=A732AA24CE9BDCD2"},
-      { text: "天文新知：火星地下有海洋？最新研究再度支持地下水庫存在", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=882F57BFC2FAA7C4"},
-      { text: "天文新知：在火星地表首度觀測到可見光波段的綠色極光", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=D694D552027F0520"}
+      { text: "天文新知：木衛二歐羅巴衛星的冰殼下可能遍布淺層液態水", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=94A6706976C31A73"}
     ]
   },
   {
     title: "土星",
-    knowledge: `火星是離太陽第四近的行星，也是繼月球後，科學家探索的下一個目標。
-    
-    隨著阿提米絲計劃的推進，人類將首先在月球上建立基地。這不僅是為了科學研究，更是為了登陸火星，打造人類未來可能的地外家園！`,
+    knowledge: `土星構成與木星相似。土星環是由眾多碎冰和塵埃組成。其中一塊形成了衛星達芙妮斯，它的引力會擾動附近的環產生波紋。土星的衛星數量是太陽系行星之最，目前已確認的有274顆`,
     link: [
-      { text: "NASA：Mars", url: "https://science.nasa.gov/mars/facts/"},
-      { text: "NASA：阿提米絲計畫", url: "https://www.nasa.gov/reference/artemis-i-2/"},
-      { text: "天文新知：阿提米絲任務將迎來太空團隊的新紀元", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=4206B349FF3C2D45"},
-      { text: "天文新知：我們對火星為何呈紅色的理解錯了嗎？", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=A732AA24CE9BDCD2"},
-      { text: "天文新知：火星地下有海洋？最新研究再度支持地下水庫存在", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=882F57BFC2FAA7C4"},
-      { text: "天文新知：在火星地表首度觀測到可見光波段的綠色極光", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=D694D552027F0520"}
+      { text: "NASA：Saturn", url: "https://science.nasa.gov/saturn/facts/"}
     ]
   },
   {
     title: "天王星",
-    knowledge: `火星是離太陽第四近的行星，也是繼月球後，科學家探索的下一個目標。
+    knowledge: `天王星大氣主要由氫、氦組成，還含有較高比例，由水、氨、甲烷組成的冰。是太陽系溫度最低的行星，表面最低溫紀錄僅 -224°C。
     
-    隨著阿提米絲計劃的推進，人類將首先在月球上建立基地。這不僅是為了科學研究，更是為了登陸火星，打造人類未來可能的地外家園！`,
+    靠近核心處有著超離子冰，這種冰是黑色的且可以導電。天王星自轉軸和軌道面近乎平行，意謂其幾乎是"躺著公轉"`,
     link: [
-      { text: "NASA：Mars", url: "https://science.nasa.gov/mars/facts/"},
-      { text: "NASA：阿提米絲計畫", url: "https://www.nasa.gov/reference/artemis-i-2/"},
-      { text: "天文新知：阿提米絲任務將迎來太空團隊的新紀元", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=4206B349FF3C2D45"},
-      { text: "天文新知：我們對火星為何呈紅色的理解錯了嗎？", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=A732AA24CE9BDCD2"},
-      { text: "天文新知：火星地下有海洋？最新研究再度支持地下水庫存在", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=882F57BFC2FAA7C4"},
-      { text: "天文新知：在火星地表首度觀測到可見光波段的綠色極光", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=D694D552027F0520"}
+      { text: "NASA：Uranus", url: "https://science.nasa.gov/uranus/facts/"}
     ]
   },
   {
     title: "海王星",
-    knowledge: `火星是離太陽第四近的行星，也是繼月球後，科學家探索的下一個目標。
+    knowledge: `海王星是先透過計算發現，後才由直接觀測證實，為太陽系行星中僅有。構成與天王星類似。
     
-    隨著阿提米絲計劃的推進，人類將首先在月球上建立基地。這不僅是為了科學研究，更是為了登陸火星，打造人類未來可能的地外家園！`,
+    海王星有著太陽系最快的風速，可達時速 2000 公里。雖然體積較天王星小，質量卻較其更大`,
     link: [
-      { text: "NASA：Mars", url: "https://science.nasa.gov/mars/facts/"},
-      { text: "NASA：阿提米絲計畫", url: "https://www.nasa.gov/reference/artemis-i-2/"},
-      { text: "天文新知：阿提米絲任務將迎來太空團隊的新紀元", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=4206B349FF3C2D45"},
-      { text: "天文新知：我們對火星為何呈紅色的理解錯了嗎？", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=A732AA24CE9BDCD2"},
-      { text: "天文新知：火星地下有海洋？最新研究再度支持地下水庫存在", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=882F57BFC2FAA7C4"},
-      { text: "天文新知：在火星地表首度觀測到可見光波段的綠色極光", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=D694D552027F0520"}
+      { text: "NASA：Neptune", url: "https://science.nasa.gov/neptune/facts/"},
+      { text: "NASA：Supersonic Wind", url: "https://svs.gsfc.nasa.gov/11349"}
     ]
   },
   {
     title: "冥王星",
-    knowledge: `火星是離太陽第四近的行星，也是繼月球後，科學家探索的下一個目標。
+    knowledge: `冥王星的稀薄大氣含有氮氣、甲烷、一氧化碳。表面除了有許多隕石坑，還有水冰構成的山脈、峽谷、平原、冰河，意味著冥王星至今仍有活躍的地質活動。
     
-    隨著阿提米絲計劃的推進，人類將首先在月球上建立基地。這不僅是為了科學研究，更是為了登陸火星，打造人類未來可能的地外家園！`,
+    冥王星有紅色的雪，科學家認為是因為大氣中的甲烷被宇宙射線和紫外線照射後分解，產生名為托林的有機分子，這些分子再像雨一樣沉降所造成。`,
     link: [
-      { text: "NASA：Mars", url: "https://science.nasa.gov/mars/facts/"},
-      { text: "NASA：阿提米絲計畫", url: "https://www.nasa.gov/reference/artemis-i-2/"},
-      { text: "天文新知：阿提米絲任務將迎來太空團隊的新紀元", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=4206B349FF3C2D45"},
-      { text: "天文新知：我們對火星為何呈紅色的理解錯了嗎？", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=A732AA24CE9BDCD2"},
-      { text: "天文新知：火星地下有海洋？最新研究再度支持地下水庫存在", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=882F57BFC2FAA7C4"},
-      { text: "天文新知：在火星地表首度觀測到可見光波段的綠色極光", url: "https://tam.gov.taipei/News_Content.aspx?n=EF86D8AF23B9A85B&sms=F32C4FF0AC5C2801&s=D694D552027F0520"}
+      { text: "NASA：Pluto", url: "https://science.nasa.gov/pluto/facts/"},
+      { text: "NASA：Pluto: The ‘Other’ Red Planet", url: "https://www.nasa.gov/missions/pluto-the-other-red-planet/"}
     ]
   }
 ]
