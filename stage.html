@@ -8,7 +8,7 @@
 <style>
 body{
   margin:0;
-  background:transparent;
+  background:#000;
   font-family:'Noto Sans TC',sans-serif;
   color:#fff;
 }
@@ -865,11 +865,11 @@ h4 {
   <img id="planet-image" src="" alt="planet">
 
   <div id="shop-btn" title="商店">
-    <img id="shop-icon" src="https://raw.githubusercontent.com/BonBonChou/The_Great_Solar_System_Adventure/main/images/shop.png" alt="shop">
+    <img id="shop-icon" src="https://raw.githubusercontent.com/Rogerspan169/Solar_system_adventure/main/images/shop.png" alt="shop">
   </div>
 
   <div id="rules-btn" title="規則">
-    <img id="rules-icon" src="https://raw.githubusercontent.com/BonBonChou/The_Great_Solar_System_Adventure/main/images/rules.png" alt="rules">
+    <img id="rules-icon" src="https://raw.githubusercontent.com/Rogerspan169/Solar_system_adventure/main/images/rules.png" alt="rules">
   </div>
 
 
@@ -1155,7 +1155,7 @@ let HAND_SIZE = 8;                 // 可由道具升到 11
 const HAND_SIZE_MAX = 11;
 const MAX_SELECT = 5;
 
-const CARD_IMAGE_PATH = 'https://raw.githubusercontent.com/ogerspan169/Solar_system_adventure/main/images/';
+const CARD_IMAGE_PATH = 'https://raw.githubusercontent.com/Rogerspan169/Solar_system_adventure/main/images/';
 
 // 每關棄牌次數（預設 3 次）
 const DISCARD_PER_LEVEL = 3;
@@ -1198,21 +1198,21 @@ const STAGE_INFO = {
 
 const LEVELS = [
   // 第一大關
-  { stage:1, name:"水星", targetFuel:60, passCoins:10, image:"https://raw.githubusercontent.com/BonBonChou/The_Great_Solar_System_Adventure/main/images/mercury.png", traits:["極端溫差","稀薄/缺乏大氣"] },
-  { stage:1, name:"金星", targetFuel:70, passCoins:12, image:"https://raw.githubusercontent.com/BonBonChou/The_Great_Solar_System_Adventure/main/images/venus.png", traits:["高壓環境","地質高度活躍"] },
-  { stage:1, name:"地球", targetFuel:80, passCoins:14, image:"https://raw.githubusercontent.com/BonBonChou/The_Great_Solar_System_Adventure/main/images/earth.png", traits:["地質高度活躍","可能存在生命"] },
-  { stage:1, name:"火星", targetFuel:90, passCoins:16, image:"https://raw.githubusercontent.com/BonBonChou/The_Great_Solar_System_Adventure/main/images/mars.png", traits:["極端溫差","稀薄/缺乏大氣"] },
+  { stage:1, name:"水星", targetFuel:60, passCoins:10, image:"https://raw.githubusercontent.com/Rogerspan169/Solar_system_adventure/main/images/mercury.png", traits:["極端溫差","稀薄/缺乏大氣"] },
+  { stage:1, name:"金星", targetFuel:70, passCoins:12, image:"https://raw.githubusercontent.com/Rogerspan169/Solar_system_adventure/main/images/venus.png", traits:["高壓環境","地質高度活躍"] },
+  { stage:1, name:"地球", targetFuel:80, passCoins:14, image:"https://raw.githubusercontent.com/Rogerspan169/Solar_system_adventure/main/images/earth.png", traits:["地質高度活躍","可能存在生命"] },
+  { stage:1, name:"火星", targetFuel:90, passCoins:16, image:"https://raw.githubusercontent.com/Rogerspan169/Solar_system_adventure/main/images/mars.png", traits:["極端溫差","稀薄/缺乏大氣"] },
 
   // 第二大關
-  { stage:2, name:"木星", targetFuel:140, passCoins:22, image:"https://raw.githubusercontent.com/BonBonChou/The_Great_Solar_System_Adventure/main/images/jupiter.png", traits:["高壓環境","極端氣候"] },
-  { stage:2, name:"艾歐", targetFuel:160, passCoins:25, image:"https://raw.githubusercontent.com/BonBonChou/The_Great_Solar_System_Adventure/main/images/io.png", traits:["稀薄/缺乏大氣","地質高度活躍","極端低溫"] },
-  { stage:2, name:"歐羅巴", targetFuel:175, passCoins:28, image:"https://raw.githubusercontent.com/BonBonChou/The_Great_Solar_System_Adventure/main/images/europa.png", traits:["稀薄/缺乏大氣","可能存在生命","極端低溫"] },
-  { stage:2, name:"土星", targetFuel:190, passCoins:32, image:"https://raw.githubusercontent.com/BonBonChou/The_Great_Solar_System_Adventure/main/images/saturn.png", traits:["高壓環境"] },
+  { stage:2, name:"木星", targetFuel:140, passCoins:22, image:"https://raw.githubusercontent.com/Rogerspan169/Solar_system_adventure/main/images/jupiter.png", traits:["高壓環境","極端氣候"] },
+  { stage:2, name:"艾歐", targetFuel:160, passCoins:25, image:"https://raw.githubusercontent.com/Rogerspan169/Solar_system_adventure/main/images/io.png", traits:["稀薄/缺乏大氣","地質高度活躍","極端低溫"] },
+  { stage:2, name:"歐羅巴", targetFuel:175, passCoins:28, image:"https://raw.githubusercontent.com/Rogerspan169/Solar_system_adventure/main/images/europa.png", traits:["稀薄/缺乏大氣","可能存在生命","極端低溫"] },
+  { stage:2, name:"土星", targetFuel:190, passCoins:32, image:"https://raw.githubusercontent.com/Rogerspan169/Solar_system_adventure/main/images/saturn.png", traits:["高壓環境"] },
 
   // 第三大關
-  { stage:3, name:"天王星", targetFuel:210, passCoins:45, image:"https://raw.githubusercontent.com/BonBonChou/The_Great_Solar_System_Adventure/main/images/uranus.png", traits:["極端低溫"] },
-  { stage:3, name:"海王星", targetFuel:230, passCoins:50, image:"https://raw.githubusercontent.com/BonBonChou/The_Great_Solar_System_Adventure/main/images/neptune.png", traits:["極端氣候","極端低溫"] },
-  { stage:3, name:"冥王星", targetFuel:250, passCoins:60, image:"https://raw.githubusercontent.com/BonBonChou/The_Great_Solar_System_Adventure/main/images/pluto.png", traits:["稀薄/缺乏大氣","地質高度活躍","極端低溫"] },
+  { stage:3, name:"天王星", targetFuel:210, passCoins:45, image:"https://raw.githubusercontent.com/Rogerspan169/Solar_system_adventure/main/images/uranus.png", traits:["極端低溫"] },
+  { stage:3, name:"海王星", targetFuel:230, passCoins:50, image:"https://raw.githubusercontent.com/Rogerspan169/Solar_system_adventure/main/images/neptune.png", traits:["極端氣候","極端低溫"] },
+  { stage:3, name:"冥王星", targetFuel:250, passCoins:60, image:"https://raw.githubusercontent.com/Rogerspan169/Solar_system_adventure/main/images/pluto.png", traits:["稀薄/缺乏大氣","地質高度活躍","極端低溫"] },
 ];
 
 // 目前關卡
@@ -3499,5 +3499,6 @@ function formatknowledge(knowledge) {
 
 </body>
 </html>
+
 
 
