@@ -3469,6 +3469,8 @@ function renderStar(index) {
 function nextStar() {
   const prevStage = LEVELS[levelIndex]?.stage ?? null;
   levelIndex += 1;
+  const levelInfo = LEVELS[levelIndex] || LEVELS[0];
+  targetFuel = levelInfo.targetFuel;
   resetLevelState();
   const nextStage = LEVELS[levelIndex]?.stage ?? null;
   if(prevStage && nextStage && prevStage !== nextStage){
@@ -3499,6 +3501,7 @@ function formatknowledge(knowledge) {
 
 </body>
 </html>
+
 
 
 
